@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    .strong {
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <div id="app">
+        <button @click="doAdd">몬스터 추가하기</button>
+        <ul>
+            <li v-for="item in list"
+                v-bind:class="{strong: item.hp > 300}"> {{ item.hp }} {{ item.name }}</li>
+            <span v-if="list.hp > 300">강함</span>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    { id: 1, name: "슬라임", hp: 100},
+                    { id: 2, name: "고블린", hp: 200},
+                    { id: 3, name: "드래곤", hp: 500},
+                ],
+                },
+                methods: {
+                    doAdd: function() {
+                    this.list.push(
+                        { id: 10, name: "골드드래곤", hp: 1000 }
+                        );
+                    // 1번째: 배열위치, 2번째: 몇개를 삭제할건지, 3번째: 삭제할 위치에 추가할 내용
+                }
+            }
+        });
+    </script>
+</body>
+</html>

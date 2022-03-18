@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+    <link rel="stylesheet" href="../220316_Vue/count_up_down.css">
+
+</head>
+<body>
+    <h2>금액 입력 시 자동으로 소비세가 포함된 금액을 계산하는 예제</h2>
+    <div id="app">
+        <input type="number" v-model.number="price"> 원
+        <!-- 1. 개수를 표시하는 입력 박스 추가 -->
+        <input type="number" v-model.number="ea"> 개
+        <!-- 2. 개수를 포함한 총 가격 표시 -->
+        <p>합계: {{ multiple }}원</p>
+        <p>소비세 포함 금액: {{ taxIncluded }}원</p>
+        
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                // 3. 개수 변수 추가
+                price: "",
+                ea: ""
+            },
+            computed: {
+                // price가 변하면 소비세 포함 금액도 자동 변환
+                taxIncluded: function() {
+                    return (this.price * this.ea).toFixed(2);
+                },
+                // 가격 * 개수 펑션 제작
+                multiple: function() {
+                    return (this.price * this.ea * 1.08).toFixed(2);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

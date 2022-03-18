@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <link rel="stylesheet" href="../220316_Vue/count_up_down.css"> -->
+</head>
+<body>
+    <div id="app">
+
+        <child-component1 :propsdata1="message1"></child-component1>
+        <child-component2 :propsdata2="message2"></child-component2>
+        <!-- 또 다른 자식 컴포넌트를 생성해보기 -->
+    </div>
+
+    <script>
+        Vue.component('child-component1', {
+            props: ["propsdata1"],
+            template: `<p>{{ propsdata1 }}</p>`
+        });
+
+        Vue.component('child-component2', {
+            props: ["propsdata2"],
+            template: `<p>{{ propsdata2 }}</p>`
+        });
+
+        // 또 다른 자식 컴포넌트를 추가
+
+        new Vue({
+            el: "#app",
+            data: {
+                message1 : "Hello Vue! passed from Parent Comp",
+                // 또 다른 변수 생성 : Another Hello Vue
+                message2 : "Another Hello Vue"
+            }
+        });
+    </script>
+</body>
+</html>

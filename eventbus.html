@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child-component></child-component>
+    </div>
+
+    <script>
+        // eventbus 뷰 객체 1개 생성
+        let eventBus = new Vue();
+
+        // child component
+        Vue.component('child-component', {
+            template: /* html */
+            `
+            <div>
+                하위 컴포넌트 영역입니다.
+                <button v-on:click='showLog'>show</button>
+            </div>
+            `,
+            methods: {
+                // 보내는 쪽이므로 $emit
+                showLog: function() {
+                    eventBus.$emit('triggerEventBus', 100);
+                }
+            }
+        });
+
+        let app = new Vue({
+            el: '#app',
+            // 받는 쪽이므로 $on
+            created: function() {
+                eventBus.$on('triggerEventBus', function(value) {
+                    console.log('이벤트 전달 받음. 전달 받은 값:' + value);
+                })
+            }
+        })
+    </script>
+</body>
+</html>
